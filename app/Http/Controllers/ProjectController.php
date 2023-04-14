@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -73,6 +73,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        Storage::disk('public')->delete($project->image);
+        $project->delete();
+        return redirect('/projects')->with('success', 'Project deleted.');
     }
 }

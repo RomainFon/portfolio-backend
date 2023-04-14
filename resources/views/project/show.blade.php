@@ -10,11 +10,7 @@
                         {{ __('Edit Project') }}
                     </x-primary-button>
                 </a>
-                <a href="{{ route('projects.create') }}">
-                    <x-danger-button class="ml-3">
-                        {{ __('Delete Project') }}
-                    </x-danger-button>
-                </a>
+                @include('project.partials.delete-form')
             </div>
         </div>
     </x-slot>
