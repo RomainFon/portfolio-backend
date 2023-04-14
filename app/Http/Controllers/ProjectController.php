@@ -36,7 +36,7 @@ class ProjectController extends Controller
         $validated = $request->validated();
 
         Project::create(array_merge($validated, [
-            'image' => $request->file('image')->store('projects')
+            'image' => $request->file('image')->store('public/projects')
         ]));
 
         return redirect('/');
@@ -47,7 +47,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('project.show', [
+            'project' => $project
+        ]);
     }
 
     /**
