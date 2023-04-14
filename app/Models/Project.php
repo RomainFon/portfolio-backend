@@ -15,4 +15,13 @@ class Project extends Model
      * @var array
      */
     protected $fillable = ['title', 'slug', 'date', 'image', 'description'];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'date' => 'date:Y-m-d',
+    ];
 }
