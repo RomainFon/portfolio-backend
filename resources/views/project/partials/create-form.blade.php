@@ -35,7 +35,7 @@
 
         <div>
             <x-input-label for="description" :value="__('Description')" />
-            <x-wysiwyg-input name="description">test</x-wysiwyg-input>
+            <x-wysiwyg-input name="description"></x-wysiwyg-input>
             <x-input-error class="mt-2" :messages="$errors->get('description')" />
         </div>
 

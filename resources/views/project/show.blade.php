@@ -5,7 +5,7 @@
                 {{ __('Project') }}
             </h2>
             <div>
-                <a href="{{ route('projects.create') }}">
+                <a href="{{ route('projects.edit', ['project' => $project->getKey()]) }}">
                     <x-primary-button class="ml-3">
                         {{ __('Edit Project') }}
                     </x-primary-button>

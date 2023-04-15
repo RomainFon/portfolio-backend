@@ -33,13 +33,13 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        $validated = $request->validated();
+        $attributes = $request->validated();
 
-        Project::create(array_merge($validated, [
-            'image' => $request->file('image')->store('public/projects')
-        ]));
+        $attributes['image'] = Storage::disk('public')->putFile('projects', $request->file('image'));
 
-        return redirect('/');
+        Project::create($attributes);
+
+        return redirect('/projects');
     }
 
     /**
@@ -57,7 +57,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('project.edit', [
+            'project' => $project
+        ]);
     }
 
     /**
@@ -65,7 +67,15 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $attributes = $request->validated();
+
+        if ($request->file('image')) {
+            Storage::disk('public')->delete($project->image);
+            $attributes['image'] = Storage::disk('public')->putFile('projects', $request->file('image'));
+        }
+
+        $project->update($attributes);
+        return redirect('/projects');
     }
 
     /**
