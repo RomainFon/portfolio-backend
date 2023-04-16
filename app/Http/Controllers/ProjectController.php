@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\Technology;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
@@ -25,7 +26,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('project.create');
+        $technologies = Technology::get(['id as value', 'name as text']);
+        return view('project.create', [
+            'technologies' => $technologies
+        ]);
     }
 
     /**
@@ -37,7 +41,11 @@ class ProjectController extends Controller
 
         $attributes['image'] = Storage::disk('public')->putFile('projects', $request->file('image'));
 
-        Project::create($attributes);
+        $project = Project::create($attributes);
+        foreach ($attributes['technologies'] as $technologyId) {
+            $technology = Technology::find($technologyId);
+            $project->technologies()->attach($technology);
+        }
 
         return redirect('/projects');
     }

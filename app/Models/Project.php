@@ -24,4 +24,9 @@ class Project extends Model
     protected $casts = [
         'date' => 'date:Y-m-d',
     ];
+
+    public function technologies()
+    {
+        return $this->belongsToMany(Technology::class);
+    }
 }

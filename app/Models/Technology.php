@@ -15,4 +15,9 @@ class Technology extends Model
      * @var array
      */
     protected $fillable = ['name', 'top', 'icon'];
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
 }
