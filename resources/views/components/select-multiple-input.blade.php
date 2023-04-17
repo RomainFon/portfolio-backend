@@ -7,6 +7,14 @@
 </select>
 
 <ul id="{{ $attributes['id'] . '-data' }}" class="flex mt-4">
+    @if (isset($data))
+        @foreach($data as $item)
+            <li>
+                <input type="hidden" value="{{ $item->value }}" name="{{ $attributes['id'] . '[]' }}"/>
+                <span class="inline-flex items-center rounded-full bg-blue-100 px-3 py-0.5 text-sm font-medium text-blue-800 mr-2 cursor-pointer">{{ $item->text }}</span>
+            </li>
+        @endforeach
+    @endif
 </ul>
 
 @push('scripts')
@@ -32,6 +40,12 @@
                 element.append(input, resource)
                 document.querySelector('#' + resourceName + '-data').append(element)
             }
+        })
+
+        document.querySelectorAll('#' + resourceName + '-data li').forEach(function (element) {
+            element.addEventListener('click', function () {
+                this.remove()
+            })
         })
     </script>
 @endpush

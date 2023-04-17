@@ -26,7 +26,8 @@ class UpdateProjectRequest extends FormRequest
             'slug' => 'required',
             'image' => 'image',
             'date' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'technologies' => 'array|nullable'
         ];
     }
 }

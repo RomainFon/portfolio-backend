@@ -47,7 +47,7 @@ class ProjectController extends Controller
             $project->technologies()->attach($technology);
         }
 
-        return redirect('/projects');
+        return redirect('/projects/'.$project->getKey());
     }
 
     /**
@@ -65,8 +65,11 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        $technologies = Technology::get(['id as value', 'name as text']);
         return view('project.edit', [
-            'project' => $project
+            'project' => $project,
+            'projectTechnologies' => $project->technologies()->get(['id as value', 'name as text']),
+            'technologies' => $technologies
         ]);
     }
 
@@ -83,7 +86,13 @@ class ProjectController extends Controller
         }
 
         $project->update($attributes);
-        return redirect('/projects');
+        $project->technologies()->detach();
+        foreach ($attributes['technologies'] as $technologyId) {
+            $technology = Technology::find($technologyId);
+            $project->technologies()->attach($technology);
+        }
+
+        return redirect('/projects/'.$project->getKey());
     }
 
     /**

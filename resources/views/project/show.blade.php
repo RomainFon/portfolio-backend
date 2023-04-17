@@ -45,6 +45,14 @@
                             <dt class="text-sm font-medium text-gray-900 dark:text-gray-100">Description</dt>
                             <dd class="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400 sm:col-span-2 sm:mt-0">{!! $project->description !!}</dd>
                         </div>
+                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-900 dark:text-gray-100">Technologies</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400 sm:col-span-2 sm:mt-0">
+                                @foreach($project->technologies as $technology)
+                                    <span class="inline-flex items-center rounded-full bg-blue-100 px-3 py-0.5 text-sm font-medium text-blue-800 mr-2 cursor-pointer">{{ $technology->name }}</span>
+                                @endforeach
+                            </dd>
+                        </div>
                     </dl>
                 </div>
             </div>
