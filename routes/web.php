@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\StudyController;
 use App\Http\Controllers\TechnologyController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/projects', ProjectController::class);
     Route::resource('/technologies', TechnologyController::class);
+    Route::resource('/studies', StudyController::class);
 });
 
 require __DIR__.'/auth.php';
