@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\StudyController;
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/projects', ProjectController::class);
     Route::resource('/technologies', TechnologyController::class);
     Route::resource('/studies', StudyController::class);
+    Route::resource('/jobs', JobController::class);
 });
 
 require __DIR__.'/auth.php';
