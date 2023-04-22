@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Project;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProjectRequest extends FormRequest
+class UpdateProjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,14 +17,14 @@ class StoreProjectRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules(): array
     {
         return [
             'title' => 'required',
             'slug' => 'required',
-            'image' => 'required|image',
+            'image' => 'image',
             'date' => 'required',
             'description' => 'required',
             'technologies' => 'array|nullable'
